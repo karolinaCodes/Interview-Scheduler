@@ -44,6 +44,20 @@ import axios from "axios";
 // ];
 
 export default function Application(props) {
+  // Promise.all([
+  //   axios.get("http://localhost:8001/api/days"),
+  //   axios.get("http://localhost:8001/api/appointments"),
+  //   axios.get("http://localhost:8001/api/interviewers"),
+  // ]).then(all => {
+  //   console.log(all[0]); // first
+  //   console.log(all[1]); // second
+  //   console.log(all[2]); // third
+
+  //   const [first, second, third] = all;
+
+  //   console.log(first, second, third);
+  // });
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -55,9 +69,17 @@ export default function Application(props) {
   const setDay = day => setState({...state, day});
 
   useEffect(() => {
-    const url = "http://localhost:8001/api/days";
-    axios.get(url).then(response => {
-      setDays(response.data);
+    Promise.all([
+      axios.get("http://localhost:8001/api/days"),
+      axios.get("http://localhost:8001/api/appointments"),
+      axios.get("http://localhost:8001/api/interviewers"),
+    ]).then(all => {
+      setState(prev => ({
+        ...prev,
+        day: all[0],
+        days: all[1],
+        appointments: all[2],
+      }));
     });
   }, []);
 
