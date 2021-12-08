@@ -12,10 +12,6 @@ export default function Application(props) {
     appointments: [],
   });
 
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-
-  const setDay = day => setState({...state, day});
-
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
@@ -28,6 +24,10 @@ export default function Application(props) {
       }));
     });
   }, []);
+
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+  const setDay = day => setState({...state, day});
 
   return (
     <main className="layout">
