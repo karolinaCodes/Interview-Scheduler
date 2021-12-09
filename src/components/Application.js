@@ -10,18 +10,21 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: [],
+    interviewers: {},
   });
 
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
       axios.get("http://localhost:8001/api/appointments"),
+      axios.get("http://localhost:8001/api/interviewers"),
     ]).then(all => {
       setState(prev => ({
         ...prev,
         days: all[0].data,
         appointments: all[1].data,
       }));
+      console.log((state.interviewers = all[2].data));
     });
   }, []);
 
@@ -49,7 +52,14 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments.map(appointment => {
-          return <Appointment key={appointment.id} {...appointment} />;
+          const interview = getInterview(state, appointment.interview);
+          return (
+            <Appointment
+              key={appointment.id}
+              {...appointment}
+              interview={interview}
+            />
+          );
         })}
         <Appointment key="last" time="5pm" />
       </section>
