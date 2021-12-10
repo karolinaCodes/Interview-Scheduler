@@ -31,6 +31,7 @@ export function getInterviewersForDay(state, day) {
 //   }
 // }
 
+//return a new object containing the interview data
 export function getInterview(state, interview) {
   const outputInterview = {};
   if (!interview) {
@@ -40,3 +41,12 @@ export function getInterview(state, interview) {
   outputInterview.interviewer = state.interviewers[interview.interviewer];
   return outputInterview;
 }
+
+// {
+//   "student": "Lydia Miller-Jones",
+//   "interviewer": {
+//     "id": 1,
+//     "name": "Sylvia Palmer",
+//     "avatar": "https://i.imgur.com/LpaY82x.png"
+//   }
+// }

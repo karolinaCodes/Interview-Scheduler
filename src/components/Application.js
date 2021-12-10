@@ -57,13 +57,13 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments.map(appointment => {
-          // const interview = getInterview(state, appointment.interview);
-          // console.log(getInterviewersForDay(state, state.day));
+          const interview = getInterview(state, appointment.interview);
+
           return (
             <Appointment
               key={appointment.id}
               {...appointment}
-              // interview={interview}
+              interview={interview}
               // interviewers={}
             />
           );
