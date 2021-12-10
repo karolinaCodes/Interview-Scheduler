@@ -24,9 +24,7 @@ export default function Application(props) {
       axios.get("http://localhost:8001/api/interviewers"),
     ])
       .then(all => {
-        console.log(all[2].data);
         setState(prev => ({
-          // setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
           ...prev,
           days: all[0].data,
           appointments: all[1].data,
@@ -62,9 +60,6 @@ export default function Application(props) {
       <section className="schedule">
         {dailyAppointments.map(appointment => {
           const interview = getInterview(state, appointment.interview);
-
-          // console.log(interviewersArr);
-          console.log(interview);
           return (
             <Appointment
               key={appointment.id}
