@@ -33,14 +33,3 @@ const useVisualMode = initial => {
 };
 
 export default useVisualMode;
-
-// setHistory(prev => {
-//   const historyClone = [...prev];
-//   if (historyClone.length === 1) {
-//     return historyClone;
-//   }
-
-//   const mode = historyClone.pop();
-//   setMode(historyClone[historyClone.length - 1]);
-//   return historyClone;
-// });
