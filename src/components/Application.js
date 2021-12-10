@@ -34,6 +34,10 @@ export default function Application(props) {
       .catch(err => console.error(err));
   }, []);
 
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
+
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
 
@@ -66,6 +70,7 @@ export default function Application(props) {
               {...appointment}
               interview={interview}
               interviewers={interviewers}
+              bookInterview={bookInterview}
             />
           );
         })}
