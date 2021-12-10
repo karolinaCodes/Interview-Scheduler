@@ -11,7 +11,6 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 
 const Appointment = props => {
-  console.log(props);
   const {id, time, interview, interviewers, bookInterview} = props;
   const {mode, transition, back} = useVisualMode(interview ? SHOW : EMPTY);
   function save(student, interviewer) {
@@ -19,7 +18,6 @@ const Appointment = props => {
       student,
       interviewer,
     };
-    console.log(interview, interviewers);
     // bookInterview(appointmentId, interview);
   }
 
