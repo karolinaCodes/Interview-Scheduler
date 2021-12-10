@@ -4,6 +4,7 @@ import InterviewerListItem from "./InterviewerListItem";
 
 const InterviewerList = props => {
   const {interviewers, value, onChange} = props;
+  console.log(interviewers);
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
