@@ -17,24 +17,27 @@ export default function Application(props) {
     interviewers: {},
   });
 
-  console.log(getInterviewersForDay(state, state.day));
-
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
       axios.get("http://localhost:8001/api/appointments"),
       axios.get("http://localhost:8001/api/interviewers"),
-    ]).then(all => {
-      setState(prev => ({
-        ...prev,
-        days: all[0].data,
-        appointments: all[1].data,
-      }));
-      console.log((state.interviewers = all[2].data));
-    });
+    ])
+      .then(all => {
+        console.log(all[2].data);
+        setState(prev => ({
+          // setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
+          ...prev,
+          days: all[0].data,
+          appointments: all[1].data,
+          interviewers: all[2].data,
+        }));
+      })
+      .catch(err => console.error(err));
   }, []);
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
 
   const setDay = day => setState({...state, day});
 
@@ -60,12 +63,14 @@ export default function Application(props) {
         {dailyAppointments.map(appointment => {
           const interview = getInterview(state, appointment.interview);
 
+          // console.log(interviewersArr);
+          console.log(interview);
           return (
             <Appointment
               key={appointment.id}
               {...appointment}
               interview={interview}
-              // interviewers={}
+              interviewers={interviewers}
             />
           );
         })}

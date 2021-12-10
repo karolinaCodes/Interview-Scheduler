@@ -22,7 +22,7 @@ const Form = props => {
         <form autoComplete="off" onSubmit={e => e.preventDefault()}>
           <input
             className="appointment__create-input text--semi-bold"
-            name="name"
+            name={student}
             type="text"
             placeholder="Enter Student Name"
             value={student}
