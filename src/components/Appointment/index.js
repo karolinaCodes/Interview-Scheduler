@@ -18,7 +18,7 @@ const Appointment = props => {
       student,
       interviewer,
     };
-    // bookInterview(appointmentId, interview);
+    bookInterview(id, interview);
   }
 
   return (
