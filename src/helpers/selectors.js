@@ -41,12 +41,3 @@ export function getInterview(state, interview) {
   outputInterview.interviewer = state.interviewers[interview.interviewer];
   return outputInterview;
 }
-
-// {
-//   "student": "Lydia Miller-Jones",
-//   "interviewer": {
-//     "id": 1,
-//     "name": "Sylvia Palmer",
-//     "avatar": "https://i.imgur.com/LpaY82x.png"
-//   }
-// }

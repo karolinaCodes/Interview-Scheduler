@@ -21,7 +21,7 @@ const Appointment = props => {
       {mode === SHOW && (
         <Show student={interview.student} interviewer={interview.interviewer} />
       )}
-      {mode === CREATE && <Form interviewers={interviewers} onCancel={back} />}
+      {mode === CREATE && <Form interviewers={[]} onCancel={back} />}
     </article>
   );
 };
