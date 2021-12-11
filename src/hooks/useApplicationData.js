@@ -43,7 +43,7 @@ const useApplicationData = () => {
 
     const dayIndex = state.days.findIndex(day => day.appointments.includes(id));
 
-    // update to add 1 spot after cancelling interview
+    // update to remove 1 spot after cancelling interview
     const day = {
       ...getDayObj(state, state.day),
       spots: state.days[dayIndex].spots - 1,
@@ -79,12 +79,25 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
+    const dayIndex = state.days.findIndex(day => day.appointments.includes(id));
+
+    // update to add 1 spot after cancelling interview
+    const day = {
+      ...getDayObj(state, state.day),
+      spots: state.days[dayIndex].spots + 1,
+    };
+
+    // change the day with updated spots value
+    state.days[dayIndex] = day;
+    const days = state.days;
+
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
       .then(() => {
         setState(prev => ({
           ...prev,
           appointments,
+          days,
         }));
       })
       .catch(err => console.error(err));
