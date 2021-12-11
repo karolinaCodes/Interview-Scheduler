@@ -13,12 +13,15 @@ const CREATE = "CREATE";
 const Appointment = props => {
   const {id, time, interview, interviewers, bookInterview} = props;
   const {mode, transition, back} = useVisualMode(interview ? SHOW : EMPTY);
+
   function save(student, interviewer) {
     const interview = {
       student,
       interviewer,
     };
-    bookInterview(id, interview);
+    bookInterview(id, interview)
+      .then(() => transition(SHOW))
+      .catch(err => console.error(err));
   }
 
   return (
