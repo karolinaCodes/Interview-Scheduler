@@ -13,7 +13,9 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 
 const Appointment = props => {
-  const {id, time, interview, interviewers, bookInterview} = props;
+  // console.log(props);
+  const {id, time, interview, interviewers, bookInterview, cancelInterview} =
+    props;
   const {mode, transition, back} = useVisualMode(interview ? SHOW : EMPTY);
 
   function save(student, interviewer) {
@@ -27,12 +29,20 @@ const Appointment = props => {
       .catch(err => console.error(err));
   }
 
+  // function delete (id){
+
+  // }
+
   return (
     <article className="appointment">
       <Header time={time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
-        <Show student={interview.student} interviewer={interview.interviewer} />
+        <Show
+          student={interview.student}
+          interviewer={interview.interviewer}
+          // onDelete={}
+        />
       )}
       {mode === CREATE && (
         <Form interviewers={interviewers} onCancel={back} onSave={save} />

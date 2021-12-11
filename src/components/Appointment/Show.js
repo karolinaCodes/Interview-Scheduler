@@ -1,7 +1,9 @@
 import React from "react";
 
 const Show = props => {
-  const {student, interviewer, onEdit, onDelete} = props;
+  console.log(props);
+  const {student, interviewer, onEdit} = props;
+
   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
@@ -23,7 +25,7 @@ const Show = props => {
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
-            onClick={onDelete}
+            // onClick={onDelete}
           />
         </section>
       </section>
