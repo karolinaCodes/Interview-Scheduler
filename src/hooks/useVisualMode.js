@@ -18,6 +18,7 @@ const useVisualMode = initial => {
     setHistory(prev => [...prev, newMode]);
   };
 
+  //goes back to previous mode
   const back = () => {
     if (history.length === 1) {
       return history;
