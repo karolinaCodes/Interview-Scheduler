@@ -4,6 +4,9 @@ import {
   getInterviewersForDay,
 } from "helpers/selectors";
 
+// setState- so new val is calculated and components are updated
+// days->day.spots
+// after we make an app or delete an app
 const state = {
   days: [
     {
@@ -11,12 +14,14 @@ const state = {
       name: "Monday",
       appointments: [1, 2, 3],
       interviewers: [1, 2],
+      // spots: 5,
     },
     {
       id: 2,
       name: "Tuesday",
       appointments: [4, 5],
       interviewers: [1, 2],
+      // spots: 4,
     },
   ],
   appointments: {

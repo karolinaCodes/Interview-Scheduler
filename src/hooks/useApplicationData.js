@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
+import {getAppointmentsForDay} from "../helpers/selectors";
 
 // manages data of application
 const useApplicationData = () => {
@@ -26,6 +27,18 @@ const useApplicationData = () => {
       })
       .catch(err => console.error(err));
   }, []);
+
+  const calcSpots = (state, day) => {
+    const dailyAppointments = getAppointmentsForDay(state, state.day);
+    const spots = dailyAppointments.reduce(
+      (acc, curr) => (!curr.interview ? ++acc : acc),
+      0
+    );
+    return spots;
+  };
+
+  const spots = calcSpots(state, state.day);
+  console.log(spots);
 
   function bookInterview(id, interview) {
     const appointment = {
