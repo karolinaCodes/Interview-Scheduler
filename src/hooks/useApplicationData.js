@@ -1,5 +1,6 @@
 import {useState} from "react";
 
+// manages data of application
 const useApplicationData = () => {
   const [state, setState] = useState({
     day: "Monday",
