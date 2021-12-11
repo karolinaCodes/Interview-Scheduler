@@ -3,7 +3,6 @@ import DayListItem from "./DayListItem";
 
 const DayList = props => {
   const {days, value, onChange} = props;
-  console.log(days);
   return (
     <ul>
       {days.map(dayItem => {

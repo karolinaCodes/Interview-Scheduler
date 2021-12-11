@@ -11,8 +11,6 @@ const useApplicationData = () => {
     interviewers: {},
   });
 
-  console.log(state.days);
-
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),

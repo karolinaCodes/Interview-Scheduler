@@ -15,7 +15,7 @@ export default function Application(props) {
 
   const interviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-  console.log(dailyAppointments);
+
   return (
     <main className="layout">
       <section className="sidebar">
