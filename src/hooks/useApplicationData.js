@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
-import {getAppointmentsForDay} from "../helpers/selectors";
+import {getDayObj} from "../helpers/selectors";
 
 // manages data of application
 const useApplicationData = () => {
@@ -10,6 +10,8 @@ const useApplicationData = () => {
     appointments: [],
     interviewers: {},
   });
+
+  console.log(state.days);
 
   useEffect(() => {
     Promise.all([
@@ -28,18 +30,6 @@ const useApplicationData = () => {
       .catch(err => console.error(err));
   }, []);
 
-  const calcSpots = (state, day) => {
-    const dailyAppointments = getAppointmentsForDay(state, state.day);
-    const spots = dailyAppointments.reduce(
-      (acc, curr) => (!curr.interview ? ++acc : acc),
-      0
-    );
-    return spots;
-  };
-
-  const spots = calcSpots(state, state.day);
-  console.log(spots);
-
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -51,6 +41,18 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
+    const dayIndex = state.days.findIndex(day => day.appointments.includes(id));
+
+    // update to add 1 spot after cancelling interview
+    const day = {
+      ...getDayObj(state, state.day),
+      spots: state.days[dayIndex].spots - 1,
+    };
+
+    // change the day with updated spots value
+    state.days[dayIndex] = day;
+    const days = state.days;
+
     // return promise to update transition to show in appointment
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, {
@@ -60,6 +62,7 @@ const useApplicationData = () => {
         setState(prev => ({
           ...prev,
           appointments,
+          days,
         }));
       })
       .catch(err => console.error(err));
