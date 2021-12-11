@@ -56,6 +56,10 @@ export default function Application(props) {
     });
   }
 
+  function cancelInterview(id) {
+    //set interview data to null
+  }
+
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
 
