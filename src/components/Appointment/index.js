@@ -15,6 +15,8 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 const Appointment = props => {
   const {id, time, interview, interviewers, bookInterview, cancelInterview} =
@@ -29,14 +31,14 @@ const Appointment = props => {
     };
     bookInterview(id, interview)
       .then(() => transition(SHOW))
-      .catch(err => console.error(err));
+      .catch(() => transition(ERROR_SAVE));
   }
 
   function deleteInterview(id) {
     transition(DELETING, true);
     cancelInterview(id)
       .then(() => transition(EMPTY))
-      .catch(err => console.error(err));
+      .catch(() => transition(ERROR_DELETE));
   }
 
   return (

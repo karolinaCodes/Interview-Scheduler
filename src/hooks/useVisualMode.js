@@ -8,10 +8,12 @@ const useVisualMode = initial => {
     //if replace is true, replace the current mode to newMode and update the history state array
     if (replace) {
       setMode(newMode);
-      const historyClone = [...history];
-      historyClone.pop();
-      historyClone.push(newMode);
-      return setHistory(historyClone);
+      return setHistory(prev => {
+        const historyClone = [...prev];
+        historyClone.pop();
+        historyClone.push(newMode);
+        return historyClone;
+      });
     }
 
     setMode(newMode);
