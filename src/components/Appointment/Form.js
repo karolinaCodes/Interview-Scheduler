@@ -18,12 +18,12 @@ const Form = props => {
   };
 
   function validate() {
-    if (name === "") {
+    if (student === "") {
       setError("Student name cannot be blank");
       return;
     }
 
-    props.onSave(name, interviewer);
+    props.onSave(student, interviewer);
   }
 
   return (
@@ -40,6 +40,7 @@ const Form = props => {
             onChange={e => setStudent(e.target.value)}
           />
         </form>
+        <section className="appointment__validation">{error}</section>
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
@@ -51,7 +52,7 @@ const Form = props => {
           <Button danger onClick={cancel}>
             Cancel
           </Button>
-          <Button confirm onClick={() => props.onSave(student, interviewer)}>
+          <Button confirm onClick={validate}>
             Save
           </Button>
         </section>
