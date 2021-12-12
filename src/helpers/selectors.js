@@ -33,7 +33,7 @@ export function getInterview(state, interview) {
   return outputInterview;
 }
 
-// retrieves day object for specific state day from days array
+// retrieves day object for particular day from state days array
 export function getDayObj(state, day) {
   return state.days.find(dayObj => dayObj.name === day);
 }
