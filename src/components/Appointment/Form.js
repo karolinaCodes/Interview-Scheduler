@@ -18,12 +18,13 @@ const Form = props => {
   };
 
   function validate() {
-    if (student === "") {
+    if (name === "") {
       setError("Student name cannot be blank");
       return;
     }
 
-    props.onSave(student, interviewer);
+    setError("");
+    props.onSave(name, interviewer);
   }
 
   return (
