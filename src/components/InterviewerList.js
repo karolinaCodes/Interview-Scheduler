@@ -23,6 +23,8 @@ const InterviewerList = props => {
   );
 };
 
+export default InterviewerList;
+
 InterviewerList.propTypes = {
   interviewers: PropTypes.array.isRequired,
 };
