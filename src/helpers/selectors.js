@@ -1,28 +1,33 @@
 export function getAppointmentsForDay(state, day) {
-  const found = state.days.filter(dayItem => dayItem.name === day);
+  // find current day object in state
+  const foundDay = state.days.filter(dayItem => dayItem.name === day);
 
-  if (!found.length) {
+  if (!foundDay.length) {
     return [];
   }
 
-  const appointmentIds = found[0].appointments;
+  // retrieve appointment ids for curr day
+  const appointmentIds = foundDay[0].appointments;
 
-  const appointments = appointmentIds.map(id => state.appointments[`${id}`]);
+  const appointmentsForDay = appointmentIds.map(id => state.appointments[id]);
 
-  return appointments;
+  return appointmentsForDay;
 }
 
 export function getInterviewersForDay(state, day) {
-  const found = state.days.filter(dayItem => dayItem.name === day)[0];
+  // find current day object in state
+  const foundDay = state.days.filter(dayItem => dayItem.name === day)[0];
 
-  if (!state.days.length || !found) {
+  if (!state.days.length || !foundDay) {
     return [];
   }
-
-  return found.interviewers.map(id => state.interviewers[id]);
+  const interviewersForDay = foundDay.interviewers.map(
+    id => state.interviewers[id]
+  );
+  return interviewersForDay;
 }
 
-//return a new object containing the interview data
+// return a new object containing the interview data
 export function getInterview(state, interview) {
   const outputInterview = {};
   if (!interview) {
@@ -33,7 +38,8 @@ export function getInterview(state, interview) {
   return outputInterview;
 }
 
-//fetch number of available spots to book an appointment- pass appointments as parameter to have the most current state of appointments after update with new interview
+// fetch number of available spots to book an appointment
+// pass appointments as parameter to have the most current state of appointments after update with new interview
 export function fetchFreeSpots(state, appointments) {
   // return appointment ids for current day
   const listOfAppointmentIds = state.days.find(
@@ -44,6 +50,7 @@ export function fetchFreeSpots(state, appointments) {
     appId => !appointments[appId].interview
   );
 
-  //return number of spots
-  return listOfEmptyAppointments.length;
+  // return number of spots
+  const spots = listOfEmptyAppointments.length;
+  return spots;
 }
