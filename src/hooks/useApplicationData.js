@@ -85,17 +85,11 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
-    const dayIndex = state.days.findIndex(day => day.appointments.includes(id));
+    const dayIndex = state.days.findIndex(day => day.name === state.day);
 
-    // update to add 1 spot after cancelling interview
-    const day = {
-      ...getDayObj(state, state.day),
-      spots: state.days[dayIndex].spots + 1,
-    };
-
-    // change the day with updated spots value
-    state.days[dayIndex] = day;
-    const days = state.days;
+    const updatedDays = {...state.days};
+    const spots = fetchFreeSpots(appointments);
+    updatedDays[dayIndex].spots = spots;
 
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
@@ -103,7 +97,7 @@ const useApplicationData = () => {
         setState(prev => ({
           ...prev,
           appointments,
-          days,
+          updatedDays,
         }));
       })
       .catch(err => console.error(err));
