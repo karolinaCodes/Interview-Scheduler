@@ -10,7 +10,11 @@ const InterviewerListItem = props => {
   });
 
   return (
-    <li className={interviewerClass} onClick={setInterviewer}>
+    <li
+      className={interviewerClass}
+      onClick={setInterviewer}
+      data-testid="interviewer-list-item"
+    >
       <img className="interviewers__item-image" src={avatar} alt={name} />
       {selected && name}
     </li>
