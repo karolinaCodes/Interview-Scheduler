@@ -11,14 +11,14 @@ const state = {
       name: "Monday",
       appointments: [1, 2, 3],
       interviewers: [1, 2],
-      // spots: 5,
+      // spots: 2,
     },
     {
       id: 2,
       name: "Tuesday",
       appointments: [4, 5],
       interviewers: [1, 2],
-      // spots: 4,
+      // spots: 3,
     },
   ],
   appointments: {
