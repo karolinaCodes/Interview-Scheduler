@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
-import {getDayObj} from "../helpers/selectors";
+import {fetchFreeSpots} from "../helpers/selectors";
 
 // manages data of application
 const useApplicationData = () => {
@@ -11,6 +11,7 @@ const useApplicationData = () => {
     interviewers: {},
   });
 
+  // fetch days, appointments and interviewers and add to state
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
@@ -28,20 +29,6 @@ const useApplicationData = () => {
       .catch(err => console.error(err));
   }, []);
 
-  //fetch number of available spots to book an appointment- pass appointments as parameter to have the most current state of appointments after update with new interview
-  function fetchFreeSpots(appointments) {
-    const listOfAppointmentIds = state.days.find(
-      day => day.name === state.day
-    ).appointments;
-
-    const listOfEmptyAppointments = listOfAppointmentIds.filter(
-      appId => !appointments[appId].interview
-    );
-
-    const spots = listOfEmptyAppointments.length;
-    return spots;
-  }
-
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -56,10 +43,9 @@ const useApplicationData = () => {
     const dayIndex = state.days.findIndex(day => day.name === state.day);
 
     const updatedDays = {...state.days};
-    const spots = fetchFreeSpots(appointments);
-    updatedDays[dayIndex].spots = spots;
+    updatedDays[dayIndex].spots = fetchFreeSpots(state, appointments);
 
-    // return promise to update transition to show in appointment
+    // return promise to update transition to show in appointment component
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, {
         interview,
@@ -88,9 +74,9 @@ const useApplicationData = () => {
     const dayIndex = state.days.findIndex(day => day.name === state.day);
 
     const updatedDays = {...state.days};
-    const spots = fetchFreeSpots(appointments);
-    updatedDays[dayIndex].spots = spots;
+    updatedDays[dayIndex].spots = fetchFreeSpots(state, appointments);
 
+    // return promise to update transition to show in appointment component
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
       .then(() => {

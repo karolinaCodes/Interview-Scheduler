@@ -33,7 +33,17 @@ export function getInterview(state, interview) {
   return outputInterview;
 }
 
-// retrieves day object for particular day from state days array
-export function getDayObj(state, day) {
-  return state.days.find(dayObj => dayObj.name === day);
+//fetch number of available spots to book an appointment- pass appointments as parameter to have the most current state of appointments after update with new interview
+export function fetchFreeSpots(state, appointments) {
+  // return appointment ids for current day
+  const listOfAppointmentIds = state.days.find(
+    day => day.name === state.day
+  ).appointments;
+
+  const listOfEmptyAppointments = listOfAppointmentIds.filter(
+    appId => !appointments[appId].interview
+  );
+
+  //return number of spots
+  return listOfEmptyAppointments.length;
 }
