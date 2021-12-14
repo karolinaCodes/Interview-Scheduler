@@ -28,6 +28,20 @@ const useApplicationData = () => {
       .catch(err => console.error(err));
   }, []);
 
+  //fetch number of available spots to book an appointment- pass appointments as parameter to have the most current state of appointments after update with new interview
+  function fetchFreeSpots(appointments) {
+    const listOfAppointmentIds = state.days.find(
+      day => day.name === state.day
+    ).appointments;
+
+    const listOfEmptyAppointments = listOfAppointmentIds.filter(
+      appId => !appointments[appId].interview
+    );
+
+    const spots = listOfEmptyAppointments.length;
+    return spots;
+  }
+
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -39,17 +53,11 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
-    const dayIndex = state.days.findIndex(day => day.appointments.includes(id));
+    const dayIndex = state.days.findIndex(day => day.name === state.day);
 
-    // update to remove 1 spot after cancelling interview
-    const day = {
-      ...getDayObj(state, state.day),
-      spots: state.days[dayIndex].spots - 1,
-    };
-
-    // change the day with updated spots value
-    state.days[dayIndex] = day;
-    const days = state.days;
+    const updatedDays = {...state.days};
+    const spots = fetchFreeSpots(appointments);
+    updatedDays[dayIndex].spots = spots;
 
     // return promise to update transition to show in appointment
     return axios
@@ -60,7 +68,7 @@ const useApplicationData = () => {
         setState(prev => ({
           ...prev,
           appointments,
-          days,
+          updatedDays,
         }));
       })
       .catch(err => console.error(err));
