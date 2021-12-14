@@ -25,6 +25,7 @@ const InterviewerList = props => {
 
 export default InterviewerList;
 
+// use propTypes to ensure interviewers prop is always an array
 InterviewerList.propTypes = {
   interviewers: PropTypes.array.isRequired,
 };
