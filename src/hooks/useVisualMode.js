@@ -23,14 +23,29 @@ const useVisualMode = initial => {
 
   // go back to previous mode in history stack
   const back = () => {
-    if (history.length === 1) {
-      return history;
-    }
-    const historyClone = [...history];
-    historyClone.pop();
-    const prevItem = historyClone[historyClone.length - 1];
-    setMode(prevItem);
-    setHistory(historyClone);
+    setHistory(prev => {
+      if (prev.length === 1) {
+        return [...prev];
+      }
+      prev.pop();
+      const prevItem = prev[prev.length - 1];
+      setMode(prevItem);
+      return prev;
+      // const historyClone = [...history];
+      // historyClone.pop();
+      // const prevItem = historyClone[historyClone.length - 1];
+      // setMode(prevItem);
+      // setHistory(historyClone);
+
+      // if (prev.length === 1) {
+      //   return [...prev];
+      // }
+
+      // const lastMode = [...prev.slice(0, -1)];
+      // setMode(lastMode[lastMode.length - 1]);
+
+      // return lastMode;
+    });
   };
 
   return {mode, transition, back};
