@@ -7,6 +7,7 @@ import useVisualMode from "../../hooks/useVisualMode";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -75,6 +76,12 @@ const Appointment = props => {
           student={interview.student}
           interviewer={interview.interviewer.id}
         />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="There was an error when saving." onClose={back} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="There was an error when deleting." onClose={back} />
       )}
     </article>
   );
