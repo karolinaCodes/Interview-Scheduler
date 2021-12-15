@@ -31,20 +31,6 @@ const useVisualMode = initial => {
       const prevItem = prev[prev.length - 1];
       setMode(prevItem);
       return prev;
-      // const historyClone = [...history];
-      // historyClone.pop();
-      // const prevItem = historyClone[historyClone.length - 1];
-      // setMode(prevItem);
-      // setHistory(historyClone);
-
-      // if (prev.length === 1) {
-      //   return [...prev];
-      // }
-
-      // const lastMode = [...prev.slice(0, -1)];
-      // setMode(lastMode[lastMode.length - 1]);
-
-      // return lastMode;
     });
   };
 
