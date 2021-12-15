@@ -19,7 +19,8 @@ The user can edit an interiew. This allows them to change the student name or ch
 
 If an interview is no longer needed, then it can be deleted. Before deleting the interview, the user is presented with a confirmation since this is a destructive action. If the server returns an error while performing an operation, an error message is displayed. The message can be dismissed be pressing the 'Close' button provided.
 
-![20211215150952796_AdobeCreativeCloudExpress](https://user-images.githubusercontent.com/82968631/146259744-5d33e2b7-0a5b-4eb9-87a6-b7f1968fee85.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/82968631/146260400-31c25c0d-8c61-4520-a2ef-7c4af2615245.gif)
+
 
 
 ## Setup
