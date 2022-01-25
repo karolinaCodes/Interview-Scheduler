@@ -21,8 +21,11 @@ If an interview is no longer needed, then it can be deleted. Before deleting the
 
 ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/82968631/146261104-568f1645-5a01-41ac-903a-80cc982af73e.gif)
 
+![A661D9B7-215E-42C0-9325-067D5139FBD3_1_201_a](https://user-images.githubusercontent.com/82968631/150899382-9ae832c1-9f03-4de6-82fd-ba468c3c00e8.jpeg)
+
 
 ## Setup
+
 
 Install dependencies with `npm install`.
 
